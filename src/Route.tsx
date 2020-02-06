@@ -8,7 +8,7 @@ export default () => (
   <Router>
     <Switch>
       <Route path="/" exact component={App} />
-      <Route path="/login/:nickname" component={Login} />
+      <Route path="/login" component={Login} />
       <Route component={NotFound} />
     </Switch>
   </Router>
