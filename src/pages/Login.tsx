@@ -14,7 +14,7 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
   handleSubmit = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
     console.log(this.state);
-    // this.props.history.push('/');
+    this.props.history.push('/');
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
