@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from "react-router-dom";
 
 export default class Login extends Component<RouteComponentProps> {
+  emailRef = React.createRef<HTMLInputElement>();
+  passwordRef = React.createRef<HTMLInputElement>()
+  
   handleSubmit = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    this.props.history.push('/'); 
+    const formData = {
+      email: this.emailRef.current!.value,
+      password: this.passwordRef.current!.value
+    }
+    console.log(formData);
+    // this.props.history.push('/'); 
   }
 
   render() {
@@ -14,13 +22,13 @@ export default class Login extends Component<RouteComponentProps> {
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
-              <input className="input" type="text" placeholder="Email" />
+              <input className="input" type="text" placeholder="Email" ref={this.emailRef} />
             </div>
           </div>
           <div className="field">
             <label>Password</label>
             <div className="control">
-              <input className="input" type="text" placeholder="Password" />
+              <input className="input" type="text" placeholder="Password" ref={this.passwordRef} />
             </div>
           </div>
           <div className="control">
