@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ToolBox from 'components/ToolBox';
-import Product from 'components/Product';
+import ToolBox from 'components/App/ToolBox';
+import Product from 'components/App/Product';
 import { ProductsState } from "types";
 
 export default class Products extends Component<{}, ProductsState> {
@@ -20,10 +20,10 @@ export default class Products extends Component<{}, ProductsState> {
         {
           id: 2,
           name: 'Shoes',
-          image: 'images/1.jpg',
+          image: 'images/2.jpg',
           tags: '14 colors',
           price: 4559,
-          status: 'available'
+          status: 'unavailable'
         }
       ]
     };
