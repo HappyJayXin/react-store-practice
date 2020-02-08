@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent, FormEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { LoginState } from "types";
 
@@ -12,13 +12,13 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
     };
   }
 
-  handleSubmit = (event: React.FormEvent<HTMLInputElement>) => {
+  handleSubmit = (event: FormEvent<HTMLInputElement>) => {
     event.preventDefault();
     console.log(this.state);
     this.props.history.push('/');
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       [e.target.name]: e.target.value
     } as Pick<LoginState, keyof LoginState>)
