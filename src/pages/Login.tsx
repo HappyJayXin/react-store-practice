@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { LoginState } from "types";
 
 export default class Login extends Component<RouteComponentProps, LoginState> {
   constructor(props: RouteComponentProps) {
@@ -46,9 +47,4 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
       </div>
     );
   }
-}
-
-interface LoginState {
-  email: string;
-  password: string
 }

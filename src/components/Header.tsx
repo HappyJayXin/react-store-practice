@@ -1,8 +1,5 @@
 import React, {FunctionComponent} from 'react';
-
-type HeaderState = {
-  nickname: string;
-};
+import { HeaderState } from "types";
 
 const Header: FunctionComponent<HeaderState> = ({nickname}) => (
   <header className="header">

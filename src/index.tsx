@@ -7,6 +7,6 @@ import Route from 'Route';
 import 'css/app.scss';
 import 'css/style.scss';
 
-ReactDOM.render(<Route />, document.getElementById('app'));
+ReactDOM.render(<Route />, document.getElementById('app') as HTMLElement);
 
 serviceWorker.unregister();
