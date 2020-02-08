@@ -2,31 +2,22 @@ import React, { Component } from 'react';
 import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
 import { ProductsState } from "types";
+import { getProducts } from "api/app";
 
 export default class Products extends Component<{}, ProductsState> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      product: [
-        {
-          id: 1,
-          name: 'Shoes',
-          image: 'images/1.jpg',
-          tags: '14 colors',
-          price: 4559,
-          status: 'available'
-        },
-        {
-          id: 2,
-          name: 'Shoes',
-          image: 'images/2.jpg',
-          tags: '14 colors',
-          price: 4559,
-          status: 'unavailable'
-        }
-      ]
+      product: []
     };
+  }
+
+  async componentDidMount() {
+    const { data } = await getProducts();
+    this.setState({
+      product: data
+    })
   }
 
   render() {
