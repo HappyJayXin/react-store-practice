@@ -1,7 +1,8 @@
 // Products components
 export interface ProductsState {
   product: Array<productType>;
-  sourceProduct: Array<productType>
+  sourceProduct: Array<productType>,
+  panelActive: boolean
 }
 
 // Product components
@@ -30,4 +31,9 @@ export interface ToolBoxProps {
 
 export interface ToolBoxState {
   searchText: string
+}
+
+export interface PanelProps {
+  active: boolean,
+  close: () => void
 }

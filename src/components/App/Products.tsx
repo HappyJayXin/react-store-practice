@@ -4,6 +4,7 @@ import Product from 'components/App/Product';
 import { ProductsState } from 'types';
 import { getProducts } from 'api/app';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Panel from 'components/Common/Panel';
 
 export default class Products extends Component<{}, ProductsState> {
   constructor(props: any) {
@@ -11,7 +12,8 @@ export default class Products extends Component<{}, ProductsState> {
 
     this.state = {
       product: [], // For filter data
-      sourceProduct: []
+      sourceProduct: [],
+      panelActive: false
     };
   }
 
@@ -37,16 +39,30 @@ export default class Products extends Component<{}, ProductsState> {
     });
   };
 
+    open = () => {
+    this.setState({
+      panelActive: true
+    })
+  }
+
+  close = () => {
+    this.setState({
+      panelActive: false
+    })
+  }
+
   render() {
+    const { panelActive } = this.state
     return (
       <>
+        <Panel active={panelActive} close={this.close} />
         <ToolBox search={this.search} />
         <div className="products">
           <div className="columns is-desktop is-multiline">
             <TransitionGroup component={null}>
               {this.state.product.map(prod => {
                 return (
-                  <CSSTransition classNames="product" timeout={{enter: 200, exit: 300}}key={prod.id} >
+                  <CSSTransition classNames="product" timeout={{enter: 200, exit: 300}} key={prod.id} >
                     <div className="column is-3" key={prod.id}>
                       <Product product={prod} />
                     </div>
@@ -54,6 +70,7 @@ export default class Products extends Component<{}, ProductsState> {
                 );
               })}
             </TransitionGroup>
+            <button className="is-primary button add-btn" onClick={this.open}>Add</button>
           </div>
         </div>
       </>
