@@ -13,8 +13,10 @@ export default class Products extends Component<{}, ProductsState> {
     this.state = {
       product: [], // For filter data
       sourceProduct: [],
-      panelActive: false
+      panelActive: false,
+      panelRef: React.createRef<Panel>()
     };
+    
   }
 
   async componentDidMount() {
@@ -39,30 +41,30 @@ export default class Products extends Component<{}, ProductsState> {
     });
   };
 
-    open = () => {
-    this.setState({
-      panelActive: true
+  toAdd = () => {
+    this.state.panelRef.current.open({
+      callback: (data: any) => {
+        console.log(data);
+      }
     })
-  }
-
-  close = () => {
-    this.setState({
-      panelActive: false
-    })
-  }
+  };
 
   render() {
-    const { panelActive } = this.state
+    const { panelRef } = this.state;
     return (
       <>
-        <Panel active={panelActive} close={this.close} />
+        <Panel ref={panelRef} />
         <ToolBox search={this.search} />
         <div className="products">
           <div className="columns is-desktop is-multiline">
             <TransitionGroup component={null}>
               {this.state.product.map(prod => {
                 return (
-                  <CSSTransition classNames="product" timeout={{enter: 200, exit: 300}} key={prod.id} >
+                  <CSSTransition
+                    classNames="product"
+                    timeout={{ enter: 200, exit: 300 }}
+                    key={prod.id}
+                  >
                     <div className="column is-3" key={prod.id}>
                       <Product product={prod} />
                     </div>
@@ -70,7 +72,9 @@ export default class Products extends Component<{}, ProductsState> {
                 );
               })}
             </TransitionGroup>
-            <button className="is-primary button add-btn" onClick={this.open}>Add</button>
+            <button className="is-primary button add-btn" onClick={this.toAdd}>
+              Add
+            </button>
           </div>
         </div>
       </>

@@ -2,7 +2,8 @@
 export interface ProductsState {
   product: Array<productType>;
   sourceProduct: Array<productType>,
-  panelActive: boolean
+  panelActive: boolean,
+  panelRef: any
 }
 
 // Product components
@@ -33,7 +34,11 @@ export interface ToolBoxState {
   searchText: string
 }
 
-export interface PanelProps {
+export interface PanelState {
   active: boolean,
-  close: () => void
+  callback: (p: string) => void
+}
+
+export interface AddInventoryProps {
+  close: (p: string) => void
 }
