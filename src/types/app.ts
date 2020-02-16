@@ -7,7 +7,7 @@ export interface ProductsState {
 }
 
 // Product components
-interface productType {
+export interface productType {
   id: number;
   name: string;
   image: string;
@@ -34,11 +34,20 @@ export interface ToolBoxState {
   searchText: string
 }
 
+// Panel
 export interface PanelState {
   active: boolean,
   callback: (p: string) => void
 }
 
 export interface AddInventoryProps {
-  close: (p: string) => void
+  close: (p?: productType) => void
+}
+
+export interface AddInventoryState {
+  name: string;
+  price: number,
+  tags: string,
+  image: string,
+  status: string
 }

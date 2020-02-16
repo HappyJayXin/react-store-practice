@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
-import { ProductsState } from 'types';
+import { ProductsState, productType } from 'types';
 import { getProducts } from 'api/app';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
@@ -43,11 +43,25 @@ export default class Products extends Component<{}, ProductsState> {
 
   toAdd = () => {
     this.state.panelRef.current.open({
-      callback: (data: any) => {
-        console.log(data);
+      callback: (data: productType) => {
+        if(data) {
+          this.add(data);
+        }
       }
     })
   };
+
+  add = (product: productType) => {
+    const _products = [...this.state.product];
+    _products.push(product);
+    const _sProducts = [...this.state.sourceProduct];
+    _sProducts.push(product);
+
+    this.setState({
+      product: _products,
+      sourceProduct: _sProducts
+    })
+  }
 
   render() {
     const { panelRef } = this.state;

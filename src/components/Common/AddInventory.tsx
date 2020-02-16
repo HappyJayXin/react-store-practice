@@ -1,23 +1,112 @@
-import React, { Component } from 'react';
-import { AddInventoryProps } from 'types'
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { AddInventoryProps, AddInventoryState } from 'types';
+import { postProducts } from 'api/app';
 
-export default class AddInventory extends Component<AddInventoryProps> {
-  render() {
-    const { close } = this.props
-    return (
-      <div className="inventory">
-        <p className="title has-text-centered">
-          inventory
-        </p>
-        <br/>
-        <div className="control">
-          <input className="input" type="text"/>
+const AddInventory = (props: AddInventoryProps) => {
+  const [product, setProduct] = useState<AddInventoryState>({
+    name: '',
+    price: 0,
+    tags: '',
+    image: '',
+    status: 'available'
+  });
+
+  const handleChange = (
+    e:
+      | ChangeEvent<HTMLTextAreaElement>
+      | ChangeEvent<HTMLInputElement>
+      | ChangeEvent<HTMLSelectElement>
+  ) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    setProduct({
+      ...product,
+      [name]: value
+    });
+  };
+
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postProducts(product).then(({data}) => {
+      props.close(data);
+    })
+  };
+
+  return (
+    <div className="inventory">
+      <p className="title has-text-centered">inventory</p>
+      <form onSubmit={submit}>
+        <div className="field">
+          <div className="control">
+            <label className="label">Name</label>
+            <textarea
+              className="textarea"
+              placeholder="Textarea"
+              name="name"
+              value={product.name}
+              onChange={handleChange}
+            ></textarea>
+          </div>
         </div>
-        <br/>
-        <div className="button" onClick={() => close('?')}>
-          Cancel
+        <div className="field">
+          <div className="control">
+            <label className="label">Price</label>
+            <input
+              type="text"
+              className="input"
+              name="price"
+              value={product.price}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
-    )
-  }
-}
+        <div className="field">
+          <div className="control">
+            <label className="label">Tags</label>
+            <input
+              type="text"
+              className="input"
+              name="tags"
+              value={product.tags}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <label className="label">Image</label>
+            <input
+              type="text"
+              className="input"
+              name="image"
+              value={product.image}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <label className="label">Status</label>
+            <div className="select is-fullwidth">
+              <select name="status" value={product.status} onChange={handleChange}>
+                <option>available</option>
+                <option>unavailable</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div className="field is-grouped is-grouped-centered">
+          <div className="control">
+            <button className="button is-link">Submit</button>
+          </div>
+          <div className="control">
+            <button className="button" type="button" onClick={() => props.close()}>Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddInventory;

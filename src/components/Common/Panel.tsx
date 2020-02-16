@@ -4,7 +4,7 @@ import AddInventory from 'components/Common/AddInventory';
 
 class Panel extends Component<{} ,PanelState> {
   constructor(props: any) {
-    super(props)
+    super(props);
   
     this.state = {
       active: false,
@@ -19,12 +19,14 @@ class Panel extends Component<{} ,PanelState> {
     });
   }
 
-  close = (p: string) => {
-    console.log(p);
+  close = (p?: any) => {
     this.setState({
       active: false
     });
-    this.state.callback(p)
+
+    if(p) {
+      this.state.callback(p);
+    }
   }
 
   render() {
@@ -33,10 +35,10 @@ class Panel extends Component<{} ,PanelState> {
 
     return (
       <div className={`panel-wrapper ${_activeClass}`}>
-        <div className="over-layer" onClick={() => this.close("?")}></div>
+        <div className="over-layer" onClick={() => this.close()}></div>
         <div className="panel">
           <div className="head">
-            <span className="close" onClick={() => this.close("?")}>x</span>
+            <span className="close" onClick={() => this.close()}>x</span>
             <AddInventory close={this.close} key={new Date().getTime()} />
           </div>
         </div>
