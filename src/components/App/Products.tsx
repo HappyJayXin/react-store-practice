@@ -20,10 +20,10 @@ export default class Products extends Component<{}, ProductsState> {
   }
 
   async componentDidMount() {
-    const { data } = await getProducts();
+    const response = await getProducts();
     this.setState({
-      product: data,
-      sourceProduct: data
+      product: response as Array<productType>,
+      sourceProduct: response as Array<productType>
     });
   }
 

@@ -1,11 +1,5 @@
-import API from 'commons/api';
-import { AddInventoryState, productType } from 'types';
-import { AxiosResponse } from 'axios';
+import { Get, Post } from 'api/method.api';
 
-export const getProducts = () => API.get('/products');
+export const getProducts = () => Get('/products');
 
-interface postProductsType {
-  (product: AddInventoryState): Promise<AxiosResponse<productType>>
-}
-
-export const postProducts: postProductsType = (product: AddInventoryState) => API.post('/products', product)
+export const postProducts = (data: any) => Post('/products', data)

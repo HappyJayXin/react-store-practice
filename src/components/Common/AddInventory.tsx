@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { AddInventoryProps, AddInventoryState } from 'types';
+import { AddInventoryProps, AddInventoryState, productType } from 'types';
 import { postProducts } from 'api/app';
 
 const AddInventory = (props: AddInventoryProps) => {
@@ -25,11 +25,10 @@ const AddInventory = (props: AddInventoryProps) => {
     });
   };
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postProducts(product).then(({data}) => {
-      props.close(data);
-    })
+    const response = await postProducts(product);
+    props.close(response as productType);
   };
 
   return (
