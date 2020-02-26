@@ -61,6 +61,21 @@ export default class Products extends Component<{}, ProductsState> {
       product: _products,
       sourceProduct: _sProducts
     })
+  };
+
+  update = (product: productType) => {
+    const _products = [...this.state.product];
+    const _index = _products.findIndex(p => p.id === product.id);
+    _products.splice(_index, 1, product);
+    _products.push(product);
+    
+    const _sProducts = [...this.state.sourceProduct];
+    const _sIndex = _sProducts.findIndex(p => p.id === product.id);_sProducts.splice(_sIndex, 1, product);
+
+    this.setState({
+      product: _products,
+      sourceProduct: _sProducts
+    })
   }
 
   render() {
@@ -80,7 +95,7 @@ export default class Products extends Component<{}, ProductsState> {
                     key={prod.id}
                   >
                     <div className="column is-3" key={prod.id}>
-                      <Product product={prod} />
+                      <Product product={prod} panelRef={panelRef} update={this.update} />
                     </div>
                   </CSSTransition>
                 );

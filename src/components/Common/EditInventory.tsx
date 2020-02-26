@@ -1,16 +1,30 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { AddInventoryProps, AddInventoryState, productType } from 'types';
-import { postProducts } from 'api/app';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { EditInventoryProps, EditInventoryState, productType } from 'types';
+import { putProducts } from 'api/app';
 import { toast } from 'react-toastify';
 
-const AddInventory = (props: AddInventoryProps) => {
-  const [product, setProduct] = useState<AddInventoryState>({
+const EditInventory = (props: EditInventoryProps) => {
+  const [product, setProduct] = useState<EditInventoryState>({
+    id: 0,
     name: '',
     price: 0,
     tags: '',
     image: '',
     status: 'available'
   });
+
+  useEffect(() => {
+    const { id ,name, price, tags, image, status } = props.product;
+
+    setProduct({
+      id,
+      name,
+      price,
+      tags,
+      image,
+      status
+    });
+  }, []);
 
   const handleChange = (
     e:
@@ -28,14 +42,14 @@ const AddInventory = (props: AddInventoryProps) => {
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await postProducts(product);
+    const response = await putProducts(product.id ,product);
     props.close(response as productType);
-    toast('success')
+    toast('success');
   };
 
   return (
     <div className="inventory">
-      <p className="title has-text-centered">inventory</p>
+      <p className="title has-text-centered">Edit</p>
       <form onSubmit={submit}>
         <div className="field">
           <div className="control">
@@ -102,7 +116,9 @@ const AddInventory = (props: AddInventoryProps) => {
             <button className="button is-link">Submit</button>
           </div>
           <div className="control">
-            <button className="button" type="button" onClick={() => props.close()}>Cancel</button>
+            <button className="button" type="button" onClick={() => props.close()}>
+              Cancel
+            </button>
           </div>
         </div>
       </form>
@@ -110,4 +126,4 @@ const AddInventory = (props: AddInventoryProps) => {
   );
 };
 
-export default AddInventory;
+export default EditInventory;

@@ -18,6 +18,8 @@ export interface productType {
 
 export interface ProductProps {
   product: productType;
+  panelRef: any;
+  update: (product: productType) => void;
 }
 
 // Header components
@@ -36,15 +38,31 @@ export interface ToolBoxState {
 
 // Panel
 export interface PanelState {
-  active: boolean,
+  active: boolean;
+  comp: string;
+  product: productType;
   callback: (p: string) => void
 }
 
 export interface AddInventoryProps {
-  close: (p?: productType) => void
+  close: (p?: productType) => void;
 }
 
 export interface AddInventoryState {
+  name: string;
+  price: number,
+  tags: string,
+  image: string,
+  status: string
+}
+
+export interface EditInventoryProps {
+  close: (p?: productType) => void;
+  product: productType;
+}
+
+export interface EditInventoryState {
+  id: number;
   name: string;
   price: number,
   tags: string,

@@ -35,3 +35,12 @@ export const Post = (path: string, data: any) => {
       .catch((error: AxiosError) => reject(error));
   });
 };
+
+export const Put = (path: string, data: any) => {
+  return new Promise((resolve, reject) => {
+    Axios
+      .put(`${path}`, data)
+      .then((response: AxiosResponse) => resolve(response))
+      .catch((error: AxiosError) => reject(error));
+  });
+};

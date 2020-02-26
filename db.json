@@ -105,44 +105,12 @@
       "id": 13
     },
     {
-      "name": "aaa",
-      "price": 0,
+      "id": 14,
+      "name": "Hello 222",
+      "price": "5500",
       "tags": "13 colors",
-      "image": "/images/3.jpg",
-      "status": "available",
-      "id": 14
-    },
-    {
-      "name": "aur --test",
-      "price": 0,
-      "tags": "13 colors",
-      "image": "/images/3.jpg",
-      "status": "available",
-      "id": 15
-    },
-    {
-      "name": "air --test?",
-      "price": 0,
-      "tags": "13 colors",
-      "image": "/images/3.jpg",
-      "status": "available",
-      "id": 16
-    },
-    {
-      "name": "air test --",
-      "price": 0,
-      "tags": "13 colors",
-      "image": "/images/3.jpg",
-      "status": "available",
-      "id": 17
-    },
-    {
-      "name": "air --test",
-      "price": 0,
-      "tags": "14 colors",
-      "image": "/images/12.jpg",
-      "status": "available",
-      "id": 18
+      "image": "/images/5.jpg",
+      "status": "available"
     }
   ],
   "carts": []

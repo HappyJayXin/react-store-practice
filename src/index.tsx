@@ -7,6 +7,15 @@ import Route from 'Route';
 import 'css/app.scss';
 import 'css/style.scss';
 
-ReactDOM.render(<Route />, document.getElementById('app') as HTMLElement);
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+ReactDOM.render(
+  <main>
+    <ToastContainer />
+    <Route />
+  </main>
+,
+document.getElementById('app') as HTMLElement);
 
 serviceWorker.unregister();
