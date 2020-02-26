@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { EditInventoryProps, EditInventoryState, productType } from 'types';
-import { putProducts } from 'api/app';
+import { putProducts, delProducts } from 'api/app';
 import { toast } from 'react-toastify';
 
 const EditInventory = (props: EditInventoryProps) => {
@@ -46,6 +46,13 @@ const EditInventory = (props: EditInventoryProps) => {
     props.close(response as productType);
     toast('success');
   };
+
+  const onDelete = async () => {
+    delProducts(product.id).then(() => {
+      props.close(product);
+      toast('Delete Success');
+    })
+  }
 
   return (
     <div className="inventory">
@@ -114,6 +121,9 @@ const EditInventory = (props: EditInventoryProps) => {
         <div className="field is-grouped is-grouped-centered">
           <div className="control">
             <button className="button is-link">Submit</button>
+          </div>
+          <div className="control">
+            <button className="button is-danger" type="button" onClick={onDelete}>Delete</button>
           </div>
           <div className="control">
             <button className="button" type="button" onClick={() => props.close()}>

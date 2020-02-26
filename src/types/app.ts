@@ -20,6 +20,7 @@ export interface ProductProps {
   product: productType;
   panelRef: any;
   update: (product: productType) => void;
+  delete: (id: number) => void;
 }
 
 // Header components

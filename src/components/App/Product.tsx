@@ -9,6 +9,7 @@ export default class Product extends Component<ProductProps> {
         callback: (data: any) => {
           if(data) {
             this.props.update(data);
+            this.props.delete(data.id);
           }
         },
         comp: 'edit',

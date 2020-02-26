@@ -78,6 +78,15 @@ export default class Products extends Component<{}, ProductsState> {
     })
   }
 
+  delete = (id: number) => {
+    const _products = this.state.product.filter(p => p.id !== id);
+    const _sProducts = this.state.product.filter(p => p.id !== id);
+    this.setState({
+      product: _products,
+      sourceProduct: _sProducts
+    })
+  }
+
   render() {
     const { panelRef } = this.state;
     return (
@@ -95,7 +104,7 @@ export default class Products extends Component<{}, ProductsState> {
                     key={prod.id}
                   >
                     <div className="column is-3" key={prod.id}>
-                      <Product product={prod} panelRef={panelRef} update={this.update} />
+                      <Product product={prod} panelRef={panelRef} update={this.update} delete={this.delete} />
                     </div>
                   </CSSTransition>
                 );

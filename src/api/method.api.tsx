@@ -44,3 +44,12 @@ export const Put = (path: string, data: any) => {
       .catch((error: AxiosError) => reject(error));
   });
 };
+
+export const Delete = (path: string) => {
+  return new Promise((resolve, reject) => {
+    Axios
+      .delete(`${path}`)
+      .then((response: AxiosResponse) => resolve(response))
+      .catch((error: AxiosError) => reject(error));
+  });
+};
