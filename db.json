@@ -11,10 +11,10 @@
     {
       "id": 2,
       "name": "Nike Paul George PG 3",
-      "image": "/images/2.jpg",
-      "tags": "25 Colors",
       "price": 53800,
-      "status": "unavailable"
+      "tags": "25 Colors",
+      "image": "/images/2.jpg",
+      "status": "available"
     },
     {
       "id": 3,
@@ -105,5 +105,14 @@
       "id": 13
     }
   ],
-  "carts": []
+  "carts": [
+    {
+      "productId": 1,
+      "name": "Air Jordan 4",
+      "image": "/images/1.jpg",
+      "price": 59440,
+      "mount": 1,
+      "id": 1
+    }
+  ]
 }

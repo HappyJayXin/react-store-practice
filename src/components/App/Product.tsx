@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { formatPrice } from 'commons/helpers';
-import { ProductProps } from "types";
+import { ProductProps } from 'types';
+import { postCarts, getCarts, putCarts } from 'api/app';
+import { toast } from 'react-toastify';
 
 export default class Product extends Component<ProductProps> {
   toEdit = () => {
@@ -16,6 +18,32 @@ export default class Product extends Component<ProductProps> {
         product: this.props.product
       })
     }
+  }
+
+  addCart = async () => {
+    try {
+      const { id, name, image, price } = this.props.product;
+      const carts = await getCarts(id);
+
+      if(carts && carts.length > 0) {
+        const cart = carts[0];
+        cart.mount += 1;
+        await putCarts(cart.id ,cart);
+      } else {
+        const cart: cartType = {
+          productId: id,
+          name,
+          image,
+          price,
+          mount: 1
+        }
+
+        await postCarts(cart);
+      }
+    } catch(err) {
+      toast.error('add error.');
+    }
+    toast.success('Already add.')
   }
 
   render() {
@@ -44,7 +72,7 @@ export default class Product extends Component<ProductProps> {
         </div>
         <div className="p-footer">
           <p className="price">{formatPrice(price)}</p>
-          <button className="add-cart" disabled={status === 'unavailable'}>
+          <button className="add-cart" disabled={status === 'unavailable'} onClick={this.addCart}>
             <i className="fas fa-shopping-cart"></i>
             <i className="fas fa-exclamation"></i>
           </button>
@@ -52,4 +80,12 @@ export default class Product extends Component<ProductProps> {
       </div>
     );
   }
+}
+
+export interface cartType {
+  productId: number;
+  name: string;
+  image: string;
+  price: number;
+  mount: number;
 }
