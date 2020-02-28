@@ -1,3 +1,5 @@
+import { RouteComponentProps } from "react-router";
+
 // Products components
 export interface ProductsState {
   product: Array<productType>;
@@ -31,7 +33,7 @@ export interface HeaderState {
 };
 
 // ToolBox components
-export interface ToolBoxProps {
+export interface ToolBoxProps extends RouteComponentProps {
   search: (value: string) => void;
   cartNum: number;
 }

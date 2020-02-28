@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import Header from 'components/App/Header';
+import React from 'react';
+import Layout from 'Layout';
 import Products from 'components/App/Products';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="main">
-        <Header nickname="Admin" />
-        <Products />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <Layout>
+    <Products />
+  </Layout>
+)
 
 export default App;
