@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from 'components/App/Header';
 import Products from 'components/App/Products';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <div className="main">
@@ -12,3 +12,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default App;

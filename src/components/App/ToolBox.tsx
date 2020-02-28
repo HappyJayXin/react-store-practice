@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent } from 'react';
 import { ToolBoxProps, ToolBoxState } from "types/app";
 
-export default class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
+class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
   constructor(props: ToolBoxProps) {
     super(props);
   
@@ -9,7 +9,6 @@ export default class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
       searchText: ''
     }
   }
-  
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -28,6 +27,7 @@ export default class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
 
   render() {
     const { searchText } = this.state;
+    const { cartNum } = this.props
 
     return (
       <div className="tool-box">
@@ -50,9 +50,11 @@ export default class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
         </div>
         <div className="cart-box">
           <i className="fas fa-shopping-cart"></i>
-          <span className="cart-num">(0)</span>
+          <span className="cart-num">({cartNum})</span>
         </div>
       </div>
     );
   }
 }
+
+export default ToolBox;

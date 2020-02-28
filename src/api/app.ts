@@ -1,5 +1,4 @@
 import { Get, Post, Put, Delete } from 'api/method.api';
-import { cartType } from 'components/App/Product';
 
 export const getProducts = () => Get('/products');
 
@@ -14,3 +13,5 @@ export const postCarts = (data: any) => Post('/carts', data);
 export const getCarts: (id: number) => Promise<any> = (id: number) => Get(`/carts?productId=${id}`);
 
 export const putCarts = (id:number, data: any) => Put(`/carts/${id}`, data);
+
+export const getAllCart = () => Get('/carts');

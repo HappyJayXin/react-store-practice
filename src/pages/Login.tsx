@@ -2,7 +2,7 @@ import React, { Component, ChangeEvent, FormEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { LoginState } from "types";
 
-export default class Login extends Component<RouteComponentProps, LoginState> {
+class Login extends Component<RouteComponentProps, LoginState> {
   constructor(props: RouteComponentProps) {
     super(props);
 
@@ -48,3 +48,5 @@ export default class Login extends Component<RouteComponentProps, LoginState> {
     );
   }
 }
+
+export default Login;

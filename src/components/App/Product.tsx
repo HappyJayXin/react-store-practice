@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { formatPrice } from 'commons/helpers';
-import { ProductProps } from 'types';
+import { ProductProps, cartType } from 'types';
 import { postCarts, getCarts, putCarts } from 'api/app';
 import { toast } from 'react-toastify';
 
-export default class Product extends Component<ProductProps> {
+class Product extends Component<ProductProps> {
   toEdit = () => {
     if(this.props.panelRef) {
       this.props.panelRef.current.open({
@@ -40,10 +40,11 @@ export default class Product extends Component<ProductProps> {
 
         await postCarts(cart);
       }
+      toast.success('Already add.');
+      this.props.updateCartNum();
     } catch(err) {
       toast.error('add error.');
     }
-    toast.success('Already add.')
   }
 
   render() {
@@ -82,10 +83,4 @@ export default class Product extends Component<ProductProps> {
   }
 }
 
-export interface cartType {
-  productId: number;
-  name: string;
-  image: string;
-  price: number;
-  mount: number;
-}
+export default Product;

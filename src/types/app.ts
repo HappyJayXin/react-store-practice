@@ -1,9 +1,10 @@
 // Products components
 export interface ProductsState {
   product: Array<productType>;
-  sourceProduct: Array<productType>,
-  panelActive: boolean,
-  panelRef: any
+  sourceProduct: Array<productType>;
+  panelActive: boolean;
+  panelRef: any;
+  cartNum: number;
 }
 
 // Product components
@@ -21,6 +22,7 @@ export interface ProductProps {
   panelRef: any;
   update: (product: productType) => void;
   delete: (id: number) => void;
+  updateCartNum: () => Promise<void>;
 }
 
 // Header components
@@ -30,11 +32,12 @@ export interface HeaderState {
 
 // ToolBox components
 export interface ToolBoxProps {
-  search: (value: string) => void
+  search: (value: string) => void;
+  cartNum: number;
 }
 
 export interface ToolBoxState {
-  searchText: string
+  searchText: string;
 }
 
 // Panel
@@ -69,4 +72,13 @@ export interface EditInventoryState {
   tags: string,
   image: string,
   status: string
+}
+
+// cartType
+export interface cartType {
+  productId: number;
+  name: string;
+  image: string;
+  price: number;
+  mount: number;
 }

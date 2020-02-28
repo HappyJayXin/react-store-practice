@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
-import { ProductsState, productType } from 'types';
-import { getProducts } from 'api/app';
+import { ProductsState, productType, cartType } from 'types';
+import { getProducts, getAllCart } from 'api/app';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
 
-export default class Products extends Component<{}, ProductsState> {
+class Products extends Component<{}, ProductsState> {
   constructor(props: any) {
     super(props);
 
@@ -14,9 +14,9 @@ export default class Products extends Component<{}, ProductsState> {
       product: [], // For filter data
       sourceProduct: [],
       panelActive: false,
-      panelRef: React.createRef<Panel>()
+      panelRef: React.createRef<Panel>(),
+      cartNum: 0
     };
-    
   }
 
   async componentDidMount() {
@@ -25,6 +25,8 @@ export default class Products extends Component<{}, ProductsState> {
       product: response as Array<productType>,
       sourceProduct: response as Array<productType>
     });
+
+    this.updateCartNum();
   }
 
   search = (text: string) => {
@@ -44,11 +46,11 @@ export default class Products extends Component<{}, ProductsState> {
   toAdd = () => {
     this.state.panelRef.current.open({
       callback: (data: productType) => {
-        if(data) {
+        if (data) {
           this.add(data);
         }
       }
-    })
+    });
   };
 
   add = (product: productType) => {
@@ -60,7 +62,7 @@ export default class Products extends Component<{}, ProductsState> {
     this.setState({
       product: _products,
       sourceProduct: _sProducts
-    })
+    });
   };
 
   update = (product: productType) => {
@@ -68,15 +70,16 @@ export default class Products extends Component<{}, ProductsState> {
     const _index = _products.findIndex(p => p.id === product.id);
     _products.splice(_index, 1, product);
     _products.push(product);
-    
+
     const _sProducts = [...this.state.sourceProduct];
-    const _sIndex = _sProducts.findIndex(p => p.id === product.id);_sProducts.splice(_sIndex, 1, product);
+    const _sIndex = _sProducts.findIndex(p => p.id === product.id);
+    _sProducts.splice(_sIndex, 1, product);
 
     this.setState({
       product: _products,
       sourceProduct: _sProducts
-    })
-  }
+    });
+  };
 
   delete = (id: number) => {
     const _products = this.state.product.filter(p => p.id !== id);
@@ -84,15 +87,29 @@ export default class Products extends Component<{}, ProductsState> {
     this.setState({
       product: _products,
       sourceProduct: _sProducts
-    })
-  }
+    });
+  };
+
+  updateCartNum = async () => {
+    const cartNum: number = await this.initCartNum();
+    this.setState({
+      cartNum: cartNum
+    });
+  };
+
+  initCartNum: () => Promise<number> = async () => {
+    const carts: any = (await getAllCart()) || [];
+    return carts
+      .map((cart: cartType) => cart.mount)
+      .reduce((prev: number, curr: number) => prev + curr, 0);
+  };
 
   render() {
-    const { panelRef } = this.state;
+    const { panelRef, cartNum } = this.state;
     return (
       <>
         <Panel ref={panelRef} />
-        <ToolBox search={this.search} />
+        <ToolBox search={this.search} cartNum={cartNum} />
         <div className="products">
           <div className="columns is-desktop is-multiline">
             <TransitionGroup component={null}>
@@ -104,7 +121,13 @@ export default class Products extends Component<{}, ProductsState> {
                     key={prod.id}
                   >
                     <div className="column is-3" key={prod.id}>
-                      <Product product={prod} panelRef={panelRef} update={this.update} delete={this.delete} />
+                      <Product
+                        product={prod}
+                        panelRef={panelRef}
+                        update={this.update}
+                        delete={this.delete}
+                        updateCartNum={this.updateCartNum}
+                      />
                     </div>
                   </CSSTransition>
                 );
@@ -119,3 +142,5 @@ export default class Products extends Component<{}, ProductsState> {
     );
   }
 }
+
+export default Products;
