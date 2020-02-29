@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
-import { ProductsState, productType, cartType } from 'types';
+import { ProductsState, productType, CartType } from 'types';
 import { getProducts, getAllCart } from 'api/app';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
@@ -100,7 +100,7 @@ class Products extends Component<{}, ProductsState> {
   initCartNum: () => Promise<number> = async () => {
     const carts: any = (await getAllCart()) || [];
     return carts
-      .map((cart: cartType) => cart.mount)
+      .map((cart: CartType) => cart.mount)
       .reduce((prev: number, curr: number) => prev + curr, 0);
   };
 

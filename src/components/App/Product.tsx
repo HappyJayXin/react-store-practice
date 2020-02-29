@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { formatPrice } from 'commons/helpers';
-import { ProductProps, cartType } from 'types';
+import { ProductProps, CartType } from 'types';
 import { postCarts, getCarts, putCarts } from 'api/app';
 import { toast } from 'react-toastify';
 
@@ -30,7 +30,7 @@ class Product extends Component<ProductProps> {
         cart.mount += 1;
         await putCarts(cart.id ,cart);
       } else {
-        const cart: cartType = {
+        const cart: CartType = {
           productId: id,
           name,
           image,

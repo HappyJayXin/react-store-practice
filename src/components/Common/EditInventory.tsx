@@ -24,7 +24,7 @@ const EditInventory = (props: EditInventoryProps) => {
       image,
       status
     });
-  }, []);
+  }, [props.product]);
 
   const handleChange = (
     e:

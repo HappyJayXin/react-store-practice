@@ -75,12 +75,3 @@ export interface EditInventoryState {
   image: string,
   status: string
 }
-
-// cartType
-export interface cartType {
-  productId: number;
-  name: string;
-  image: string;
-  price: number;
-  mount: number;
-}
