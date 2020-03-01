@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CartItemProps } from 'types';
 import { formatPrice } from 'commons/helpers';
 import { putCarts, deleteCart } from 'api/carts';
@@ -7,6 +7,10 @@ import produce from "immer";
 const CartItem = ({cart, updateCarts, afterDelete}:CartItemProps) => {
   const [mount, setMount] = useState(cart.mount);
   const {id, image, name, price} = cart || {};
+
+  const sumPrice = useMemo(() => {
+    return formatPrice(mount * price)
+  }, [mount, price]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const _mount:number = parseInt(e.target.value);
@@ -46,7 +50,7 @@ const CartItem = ({cart, updateCarts, afterDelete}:CartItemProps) => {
         <input type="number" className="input num-input" value={mount} onChange={ handleChange} min={1}/>
       </div>
       <div className="column">
-        <span className="sum-price">{formatPrice(mount * price)}</span>
+        <span className="sum-price">{sumPrice}</span>
       </div>
     </div>
   )

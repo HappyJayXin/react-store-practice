@@ -105,5 +105,38 @@
       "id": 13
     }
   ],
-  "carts": []
+  "carts": [
+    {
+      "id": 2,
+      "productId": 2,
+      "name": "Nike Paul George PG 3",
+      "image": "/images/2.jpg",
+      "price": 53800,
+      "mount": 5
+    },
+    {
+      "id": 13,
+      "productId": 13,
+      "name": "Air Jordan",
+      "image": "/images/12.jpg",
+      "price": 0,
+      "mount": 2
+    },
+    {
+      "id": 10,
+      "productId": 10,
+      "name": "adidas D.O.N. Issue #1",
+      "image": "/images/10.jpg",
+      "price": 48900,
+      "mount": 1
+    },
+    {
+      "id": 12,
+      "productId": 12,
+      "name": "Air Jordan 3",
+      "image": "/images/12.jpg",
+      "price": 44900,
+      "mount": 1
+    }
+  ]
 }
