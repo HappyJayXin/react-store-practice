@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { formatPrice } from 'commons/helpers';
 import { ProductProps, CartType } from 'types';
-import { postCarts, getCarts, putCarts } from 'api/app';
+import { postCarts, getCarts, putCarts } from 'api/carts';
 import { toast } from 'react-toastify';
 
 class Product extends Component<ProductProps> {
@@ -31,6 +31,7 @@ class Product extends Component<ProductProps> {
         await putCarts(cart.id ,cart);
       } else {
         const cart: CartType = {
+          id,
           productId: id,
           name,
           image,

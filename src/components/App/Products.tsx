@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
 import { ProductsState, productType, CartType } from 'types';
-import { getProducts, getAllCart } from 'api/app';
+import { getProducts } from 'api/app';
+import { getAllCart } from 'api/carts'
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
 

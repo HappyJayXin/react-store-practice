@@ -1,6 +1,7 @@
 
 // cartType
 export interface CartType {
+  id: number;
   productId: number;
   name: string;
   image: string;
@@ -9,5 +10,7 @@ export interface CartType {
 }
 
 export interface CartItemProps {
-  cart: CartType
+  cart: CartType;
+  updateCarts: (cart: CartType) => void;
+  afterDelete: (cart: CartType) => void;
 }

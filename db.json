@@ -27,9 +27,9 @@
     {
       "id": 4,
       "name": "Nike Air Foamposite One",
-      "image": "/images/4.jpg",
+      "price": "731",
       "tags": "84 Colors",
-      "price": 73148,
+      "image": "/images/4.jpg",
       "status": "available"
     },
     {
@@ -105,22 +105,5 @@
       "id": 13
     }
   ],
-  "carts": [
-    {
-      "productId": 1,
-      "name": "Air Jordan 4",
-      "image": "/images/1.jpg",
-      "price": 59440,
-      "mount": 2,
-      "id": 1
-    },
-    {
-      "productId": 4,
-      "name": "Nike Air Foamposite One",
-      "image": "/images/4.jpg",
-      "price": 73148,
-      "mount": 1,
-      "id": 2
-    }
-  ]
+  "carts": []
 }
