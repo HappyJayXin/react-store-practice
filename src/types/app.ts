@@ -28,8 +28,8 @@ export interface ProductProps {
 }
 
 // Header components
-export interface HeaderState {
-  nickname: string;
+export interface HeaderProps {
+  user: any
 };
 
 // ToolBox components

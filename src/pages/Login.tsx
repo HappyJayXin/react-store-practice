@@ -2,17 +2,26 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { LoginState } from 'types';
+import { postLogin } from 'api/login';
+import { toast } from 'react-toastify';
 
 const Login = (props: RouteComponentProps) => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm<LoginState>();
 
-  const onSubmit = (data: any) => {
-    console.log(data as LoginState);
-    // props.history.push('/');
-  };
+  const onSubmit = handleSubmit( async ({ email, password }) => {
+    try {
+      const jwtToken = await postLogin({email, password});
+      toast.success('Login Success');
+      global.auth.setToken(jwtToken);
+      props.history.push('/');
+    } catch (error) {
+      const message = error.response.data.message;
+      toast.error(message);
+    }
+  });
 
   return (
-    <div className="login-wrapper" onSubmit={handleSubmit(onSubmit)}>
+    <div className="login-wrapper" onSubmit={onSubmit}>
       <form className="box login-box">
         <div className="field">
           <label className="label">Email</label>
@@ -44,7 +53,7 @@ const Login = (props: RouteComponentProps) => {
               ref={register({
                 required: true,
                 minLength: {
-                  value: 6,
+                  value: 3,
                   message: 'cannot be less than 6 digits'
                 }
               })}

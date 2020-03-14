@@ -1,22 +1,23 @@
-import React, {FunctionComponent} from 'react';
-import { HeaderState } from "types";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { HeaderProps } from "types";
 
-const Header: FunctionComponent<HeaderState> = ({nickname}) => (
+const Header = ({user}: HeaderProps) => (
   <header className="header">
     <section className="grid">
       <div className="start">
-        <a href="/">Home</a>
+        <Link to="/">Home</Link>
       </div>
       <div className="end">
-        {nickname ? (
+        {user ? (
           <span className="nickname">
             <i className="fas fa-user"></i>
-            {nickname}
+            {user.nickname}
           </span>
         ) : (
           <>
-            <a href="/">Login</a>
-            <a href="/">Register</a>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
           </>
         )}
       </div>
