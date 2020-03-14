@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:3004/',
+  baseURL: 'http://localhost:3003/',
   responseType: 'json',
   headers: {
     Accept: 'application/json',
