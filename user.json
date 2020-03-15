@@ -6,6 +6,13 @@
       "email": "admin@gmail.com",
       "password": "admin",
       "type": 1
+    },
+    {
+      "id": 2,
+      "email": "curry@gmail.com",
+      "password": "111111",
+      "nickname": "Curry",
+      "type": 0
     }
   ]
 }

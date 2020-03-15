@@ -1,17 +1,17 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { LoginState } from 'types';
-import { postLogin } from 'api/login';
+import { RegisterState } from 'types';
+import { postRegister } from 'api/register';
 import { toast } from 'react-toastify';
 
-const Login = (props: RouteComponentProps) => {
-  const { register, handleSubmit, errors } = useForm<LoginState>();
+const Register = (props: RouteComponentProps) => {
+  const { register, handleSubmit, errors } = useForm<RegisterState>();
 
-  const onSubmit = handleSubmit( async ({ email, password }) => {
+  const onSubmit = handleSubmit(async ({ nickname, email, password }) => {
     try {
-      const jwtToken = await postLogin({email, password});
-      toast.success('Login Success');
+      const jwtToken = await postRegister({ nickname, email, password, type: 0 });
+      toast.success('Register Success');
       global.auth.setToken(jwtToken);
       props.history.push('/');
     } catch (error) {
@@ -23,6 +23,21 @@ const Login = (props: RouteComponentProps) => {
   return (
     <div className="login-wrapper" onSubmit={onSubmit}>
       <form className="box login-box">
+        <div className="field">
+          <label className="label">Nickname</label>
+          <div className="control">
+            <input
+              className={`input ${errors.nickname && 'is-danger'}`}
+              type="text"
+              placeholder="nickname"
+              name="nickname"
+              ref={register({
+                required: 'nickname is required'
+              })}
+            />
+            {errors.nickname && <p className="helper has-text-danger">nickname error</p>}
+          </div>
+        </div>
         <div className="field">
           <label className="label">Email</label>
           <div className="control">
@@ -62,11 +77,11 @@ const Login = (props: RouteComponentProps) => {
           </div>
         </div>
         <div className="control">
-          <button className="button is-primary is-fullwidth">Login</button>
+          <button className="button is-primary is-fullwidth">Submit</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
