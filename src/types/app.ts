@@ -47,7 +47,8 @@ export interface PanelState {
   active: boolean;
   comp: string;
   product: productType;
-  callback: (p: string) => void
+  callback: (p: string) => void;
+  props: any;
 }
 
 export interface AddInventoryProps {
@@ -74,4 +75,9 @@ export interface EditInventoryState {
   tags: string,
   image: string,
   status: string
+}
+
+export interface UserProfileProps {
+  close: (p?: productType) => void;
+  user: any;
 }

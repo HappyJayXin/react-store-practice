@@ -35,7 +35,12 @@ const getUser = () => {
   }
 };
 
+const logout = () => {
+  localStorage.removeItem(JWT_name);
+}
+
 export default global.auth = {
   setToken,
-  getUser
+  getUser,
+  logout
 };

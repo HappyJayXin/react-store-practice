@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PanelState, productType } from 'types';
 import AddInventory from 'components/Common/AddInventory';
 import EditInventory from 'components/Common/EditInventory';
+import UserProfile from 'components/Common/UserProfile';
 
 class Panel extends Component<{}, PanelState> {
   constructor(props: any) {
@@ -18,21 +19,24 @@ class Panel extends Component<{}, PanelState> {
         price: 0,
         tags: '',
         status: ''
-      }
+      },
+      props: {}
     };
   }
 
-  open = (option: {
-    callback: () => void,
-    comp: string,
-    product: productType
-  }) => {
+  open = (option: { callback: () => void; comp: string; product?: productType, props: any }) => {
     this.setState({
       active: true,
       callback: option.callback,
       comp: option.comp,
-      product: option.product
+      props: option.props
     });
+
+    if (option.product) {
+      this.setState({
+        product: option.product
+      });
+    }
   };
 
   close = (p?: any) => {
@@ -45,8 +49,19 @@ class Panel extends Component<{}, PanelState> {
     }
   };
 
+  switchComp = (comp: string, product: productType, props:any) => {
+    switch (comp) {
+      case 'edit':
+        return <EditInventory close={this.close} key={new Date().getTime()} product={product} />;
+      case 'profile':
+        return <UserProfile close={this.close} user={props.user} />;
+      default:
+        return <AddInventory close={this.close} key={new Date().getTime()} />;
+    }
+  };
+
   render() {
-    const { active, comp, product } = this.state;
+    const { active, comp, product, props } = this.state;
     const _activeClass = active ? 'active' : '';
 
     return (
@@ -57,11 +72,7 @@ class Panel extends Component<{}, PanelState> {
             <span className="close" onClick={() => this.close()}>
               x
             </span>
-            {comp === 'edit' ? (
-              <EditInventory close={this.close} key={new Date().getTime()} product={product} />
-            ) : (
-              <AddInventory close={this.close} key={new Date().getTime()} />
-            )}
+            {this.switchComp(comp, product, props)}
           </div>
         </div>
       </div>
