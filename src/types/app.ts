@@ -19,7 +19,7 @@ export interface productType {
   status: string;
 }
 
-export interface ProductProps {
+export interface ProductProps extends RouteComponentProps {
   product: productType;
   panelRef: any;
   update: (product: productType) => void;

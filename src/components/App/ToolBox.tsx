@@ -1,6 +1,7 @@
 import React, { Component, ChangeEvent } from 'react';
 import { ToolBoxProps, ToolBoxState } from "types/app";
 import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
   constructor(props: ToolBoxProps) {
@@ -21,12 +22,17 @@ class ToolBox extends Component<ToolBoxProps, ToolBoxState> {
 
   clearSearchText = () => {
     this.setState({
-      searchText: ''
+      searchText: '' 
     });
     this.props.search('');
   }
 
   goCart = () => {
+    if(!global.auth.isLogin()) {
+      this.props.history.push('/login');
+      toast.info('Please Login First');
+      return;
+    }
     this.props.history.push('/cart');
   }
 

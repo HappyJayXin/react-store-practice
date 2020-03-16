@@ -3,7 +3,7 @@ import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
 import { ProductsState, productType, CartType } from 'types';
 import { getProducts } from 'api/app';
-import { getAllCart } from 'api/carts'
+import { getAllCart } from 'api/carts';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
 
@@ -134,9 +134,11 @@ class Products extends Component<{}, ProductsState> {
                 );
               })}
             </TransitionGroup>
-            <button className="is-primary button add-btn" onClick={this.toAdd}>
-              Add
-            </button>
+            {(global.auth.getUser() || {}).type === 1 && (
+              <button className="is-primary button add-btn" onClick={this.toAdd}>
+                Add
+              </button>
+            )}
           </div>
         </div>
       </>
