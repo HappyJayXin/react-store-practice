@@ -18,6 +18,15 @@ Axios.interceptors.response.use(
   error => Promise.reject(error)
 );
 
+Axios.interceptors.request.use(
+  config => {
+    const jwtToken = global.auth.getToken();
+    config.headers['Authorization'] = `Bearer ${jwtToken}`;
+    return config;
+  },
+  error => Promise.reject(error)
+);
+
 export const Get = (path: string) => {
   return new Promise((resolve, reject) => {
     Axios

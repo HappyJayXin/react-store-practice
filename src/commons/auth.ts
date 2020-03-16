@@ -41,6 +41,7 @@ const logout = () => {
 
 export default global.auth = {
   setToken,
+  getToken,
   getUser,
   logout,
   isLogin
