@@ -3,7 +3,7 @@ import ToolBox from 'components/App/ToolBox';
 import Product from 'components/App/Product';
 import { ProductsState, productType, CartType } from 'types';
 import { getProducts } from 'api/app';
-import { getAllCart } from 'api/carts';
+import { getEmailCart } from 'api/carts';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Panel from 'components/Common/Panel';
 
@@ -99,7 +99,8 @@ class Products extends Component<{}, ProductsState> {
   };
 
   initCartNum: () => Promise<number> = async () => {
-    const carts: any = (await getAllCart()) || [];
+    const user = global.auth.getUser() || {};
+    const carts: any = (await getEmailCart(user.email)) || [];
     return carts
       .map((cart: CartType) => cart.mount)
       .reduce((prev: number, curr: number) => prev + curr, 0);

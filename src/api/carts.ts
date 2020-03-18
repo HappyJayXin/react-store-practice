@@ -6,6 +6,8 @@ export const getCarts: (id: number) => Promise<any> = (id: number) => Get(`/cart
 
 export const putCarts = (id:number, data: any) => Put(`/carts/${id}`, data);
 
+export const getEmailCart = (email: string) => Get(`/carts?userId=${email}`);
+
 export const getAllCart = () => Get('/carts');
 
 export const deleteCart = (id:number) => Delete(`/carts/${id}`);

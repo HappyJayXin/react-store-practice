@@ -7,6 +7,7 @@ export interface CartType {
   image: string;
   price: number;
   mount: number;
+  userId: string;
 }
 
 export interface CartItemProps {

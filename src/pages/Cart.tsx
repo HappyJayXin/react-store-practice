@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { getAllCart } from 'api/carts';
+import { getEmailCart } from 'api/carts';
 import { CartType } from 'types';
 import Layout from 'Layout';
 import CartItem from 'components/Cart/CartItem';
@@ -11,8 +11,10 @@ const Cart = () => {
   const [carts, setCarts] = useState<CartType[]>([]);
 
   useEffect(() => {
+    const user = global.auth.getUser() || {};
+
     const fetchCart = async () => {
-      const carts = await getAllCart();
+      const carts = await getEmailCart(user.email);
       setCarts(carts as CartType[]);
     };
 

@@ -19,6 +19,10 @@ const isAuthenticated = ({ email, password }) => {
   );
 };
 
+const isExist = email => {
+  return getUserDB().users.findIndex(user => user.email === email) !== -1;
+};
+
 const SECRET = '13212312dsf2123sdf211sdf';
 const expiresIn = '1h';
 const createToken = payload => jwt.sign(payload, SECRET, { expiresIn });
@@ -45,9 +49,9 @@ server.post('/auth/register', (req, res) => {
   const { email, password, nickname, type } = req.body;
 
   // ----- 1 step
-  if (isAuthenticated({ email, password })) {
+  if (isExist(email)) {
     const status = 401;
-    const message = 'Email and Password already exist';
+    const message = 'Email already exist';
     return res.status(status).json({ status, message });
   }
 

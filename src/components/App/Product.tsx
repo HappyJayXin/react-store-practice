@@ -29,6 +29,7 @@ class Product extends Component<ProductProps> {
     }
 
     try {
+      const user = global.auth.getUser() || {};
       const { id, name, image, price } = this.props.product;
       const carts = await getCarts(id);
 
@@ -43,7 +44,8 @@ class Product extends Component<ProductProps> {
           name,
           image,
           price,
-          mount: 1
+          mount: 1,
+          userId: user.email
         }
 
         await postCarts(cart);
