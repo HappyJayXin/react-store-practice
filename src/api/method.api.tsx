@@ -1,7 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
+console.log(process.env.REACT_APP_API_DOMAIN);
+
 const Axios = axios.create({
-  baseURL: 'http://localhost:3003/',
+  baseURL: process.env.REACT_APP_API_DOMAIN || 'http://localhost:3003/',
   responseType: 'json',
   headers: {
     Accept: 'application/json',
